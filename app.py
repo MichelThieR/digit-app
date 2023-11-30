@@ -100,11 +100,11 @@ def full_app():
         ans = str(guessed_digit.item())
         st.subheader(f"The AI guessed that it was a {ans}\n")
 
-    if canvas_result.json_data is not None:
-        objects = pd.json_normalize(canvas_result.json_data["objects"])
-        for col in objects.select_dtypes(include=["object"]).columns:
-            objects[col] = objects[col].astype("str")
-        st.dataframe(objects)
+    # if canvas_result.json_data is not None:
+    #     objects = pd.json_normalize(canvas_result.json_data["objects"])
+    #     for col in objects.select_dtypes(include=["object"]).columns:
+    #         objects[col] = objects[col].astype("str")
+    #     st.dataframe(objects)
 
 
 if __name__ == "__main__":
