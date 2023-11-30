@@ -98,7 +98,7 @@ def full_app():
         # guessed_digit = linearNet.predict(input_img)
         guessed_digit = ConvoNet.predict(input_img)
         ans = str(guessed_digit.item())
-        st.subheader(f"The AI guessed that it was a {ans}")
+        st.subheader(f"The AI guessed that it was a {ans}\n")
 
     if canvas_result.json_data is not None:
         objects = pd.json_normalize(canvas_result.json_data["objects"])
