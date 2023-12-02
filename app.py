@@ -34,20 +34,14 @@ def main():
 
     with st.sidebar:
         st.markdown("---")
-        st.markdown(
-            '<h6>Made in &nbsp<img src="https://streamlit.io/images/brand/streamlit-mark-color.png" alt="Streamlit logo" height="16">&nbsp by <a href="https://twitter.com/andfanilo">@andfanilo</a></h6>',
-            unsafe_allow_html=True,
-        )
-
 
 # full_app function corresponds to the canvas found in a public github repo
 def full_app():
-    st.sidebar.header("Configuration")
+    st.sidebar.title("Configuration")
     st.markdown(
         """
-    Draw a digit on the canvas, and the AI will guess it!
-    * Go easy at first
-    * Then try to fool it
+    Draw a number from **0 to 9** and click on the guess button!
+    * Go easy at first, then try to fool it
     * We also appreciate feedback! :)
     """
     )
@@ -68,7 +62,7 @@ def full_app():
         stroke_color=stroke_color,
         background_color=bg_color,
         background_image=Image.open(bg_image) if bg_image else None,
-        update_streamlit=False, # update just sends the canvas image to streamlit
+        update_streamlit=True, # update just sends the canvas image to streamlit
         height=400,
         width=400,
         drawing_mode=drawing_mode,
@@ -77,9 +71,7 @@ def full_app():
         key="full_app",
     )
 
-    # Do something interesting with the image data and paths
-    if canvas_result.image_data is not None:
-        # linearNet.load_state_dict(torch.load('LinearpyTeen30epocs.pth'))
+    if st.button(label="AI Guess \U0001F914", type = "primary"):
         ConvoNet.load_state_dict(torch.load('pyTeenConvo9882.pth'))
         # st.image(canvas_result.image_data)
         cv.imwrite("canvas.png",  canvas_result.image_data)
@@ -100,6 +92,11 @@ def full_app():
         ans = str(guessed_digit.item())
         st.subheader(f"The AI guessed that it was a {ans}\n")
 
+    # Do something interesting with the image data and paths
+    # if canvas_result.image_data is not None:
+        # linearNet.load_state_dict(torch.load('LinearpyTeen30epocs.pth'))
+        
+
     # if canvas_result.json_data is not None:
     #     objects = pd.json_normalize(canvas_result.json_data["objects"])
     #     for col in objects.select_dtypes(include=["object"]).columns:
@@ -110,8 +107,11 @@ def full_app():
 if __name__ == "__main__":
 
     st.set_page_config(
-        page_title="Streamlit Guessing Digit Demo", page_icon=":pencil2:"
+        page_title="Guessing Number Demo", page_icon=":pencil2:",
+        initial_sidebar_state="collapsed"
     )
-    st.title("AI trying its best to guess a digit!")
+    st.title("AI trying its best to guess a number!")
 
     main()
+
+
