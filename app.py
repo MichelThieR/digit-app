@@ -94,8 +94,15 @@ def full_app():
         ans = str(guessed_digit.item())
         st.subheader(f"The AI guessed that it was a {ans}\n")
 
-    user_feedback = st.checkbox("Did the AI guess incorrectly?")
-    if user_feedback:
+    st.markdown(""" 
+
+Was the AI spot on?
+                
+                """)
+    
+    user_feedback_Y = st.checkbox("Hell Yeah!")
+    user_feedback_N = st.checkbox("It still needs work!")
+    if user_feedback_N:
         # Create a folder for incorrect guesses if it doesn't exist
         incorrect_folder = 'incorrect_guesses'
         os.makedirs(incorrect_folder, exist_ok=True)
@@ -110,6 +117,9 @@ def full_app():
         shutil.copy("new.png", os.path.join(folder_path, "new.png"))
 
         st.success("Thank you for the feedback \U0001F601")
+
+    elif user_feedback_Y:
+        st.balloons()
 
     # Do something interesting with the image data and paths
     # if canvas_result.image_data is not None:
