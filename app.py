@@ -94,29 +94,33 @@ def full_app():
         ans = str(guessed_digit.item())
         st.subheader(f"The AI guessed that it was a {ans}\n")
 
+
     st.markdown(""" 
 
-Was the AI spot on?
-                
+**Was the AI spot on?**
+(Uncheck the box after you give the feedback)
+                     
                 """)
     
-    user_feedback_Y = st.checkbox("Hell Yeah!")
-    user_feedback_N = st.checkbox("It still needs work!")
+    user_feedback_Y = st.checkbox("Hell Yeah!",key="checkYes")
+    user_feedback_N = st.checkbox("It still needs work!",key="checkNO")
+
     if user_feedback_N:
-        # Create a folder for incorrect guesses if it doesn't exist
-        incorrect_folder = 'incorrect_guesses'
-        os.makedirs(incorrect_folder, exist_ok=True)
+            # Create a folder for incorrect guesses if it doesn't exist
+            incorrect_folder = 'incorrect_guesses'
+            os.makedirs(incorrect_folder, exist_ok=True)
 
-        # Generate a unique folder name using timestamp
-        folder_name = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-        folder_path = os.path.join(incorrect_folder, folder_name)
-        os.makedirs(folder_path, exist_ok=True)
+            # Generate a unique folder name using timestamp
+            folder_name = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+            folder_path = os.path.join(incorrect_folder, folder_name)
+            os.makedirs(folder_path, exist_ok=True)
 
-        # Save canvas.png and new.png in the created folder
-        shutil.copy("canvas.png", os.path.join(folder_path, "canvas.png"))
-        shutil.copy("new.png", os.path.join(folder_path, "new.png"))
+            # Save canvas.png and new.png in the created folder
+            shutil.copy("canvas.png", os.path.join(folder_path, "canvas.png"))
+            shutil.copy("new.png", os.path.join(folder_path, "new.png"))
 
-        st.success("Thank you for the feedback \U0001F601")
+            st.success("Thank you for the feedback \U0001F601")
+    
 
     elif user_feedback_Y:
         st.balloons()
