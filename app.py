@@ -74,7 +74,7 @@ def full_app():
     )
 
     if st.button(label="AI Guess \U0001F914", type = "primary"):
-        ConvoNet.load_state_dict(torch.load('pyTeenConvotilt96.pth'))
+        ConvoNet.load_state_dict(torch.load('pyTeenConvo9882.pth'))
         # st.image(canvas_result.image_data)
         cv.imwrite("canvas.png",  canvas_result.image_data)
 
